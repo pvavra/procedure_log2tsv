@@ -1,2 +1,5 @@
 [datalad "dataset"]
 	id = a5568b86-b8f1-474b-9659-f0b003a8b819
+
+[datalad "procedures.log2tsv"]
+	help = "converts Info.log, RESP.log and PULS.log files to .tsv files"
