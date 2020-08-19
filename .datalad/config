@@ -3,3 +3,4 @@
 
 [datalad "procedures.log2tsv"]
 	help = "converts Info.log, RESP.log and PULS.log files to .tsv files"
+	call-format = "python {script} {ds} {soucefolder} {destinationfolder}"
