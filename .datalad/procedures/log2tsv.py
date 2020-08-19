@@ -7,12 +7,19 @@ Created on Thu Aug  13 17:22:07 2020
 import os
 import sys
 import pandas as pd
-import datalad.api.save as dlsave
+from datalad.distribution.dataset import require_dataset
+
+#apparently the call structure for python automatically takes the current dataset (root?) as positional argument number two
+#to resolve said dataset and to make the procedure truly universally run-able this seems to be necessary
+ds = require_dataset(
+    sys.argv[1],
+    check_installed=True,
+    purpose='converting .mat to .tsv files')
 
 inputs = sys.argv[:]
 #print('inputs are: ',inputs)
-input1 = sys.argv[1] #my_source
-input2 = sys.argv[2] #my_destination
+input1 = sys.argv[2] #my_source
+input2 = sys.argv[3] #my_destination
 print('will gather .log files from source:', input1, 'will convert to .tsv files stored in:', input2)
 
 root = os.path.dirname(os.path.abspath('sourcedata'))
@@ -253,4 +260,4 @@ for file in os.listdir(filesource):
 
 print('#these are the files in {} after converting:\n'.format(input2),os.listdir(destination))
 
-dlsave(path='.',message='convert .log files from source ({}) to .tsv files and store them in ({})'.format(input1,input2))
+ds.save(path='.',message='convert .log files from source ({}) to .tsv files and store them in ({})'.format(input1,input2))
